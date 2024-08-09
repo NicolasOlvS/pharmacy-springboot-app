@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Produtos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Estilo para o cabeçalho */
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .navbar-nav {
+            flex-direction: row;
+        }
+
+        header .nav-item {
+            margin-left: 1rem;
+        }
+
+        /* Estilo para os botões no canto superior direito */
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 1rem;
+        }
+
+        .header-buttons a {
+            margin-left: 1rem;
+        }
+
+        .header-buttons .btn-secondary {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-buttons .btn-secondary .cart-count {
+            margin-left: 0.5rem;
+            background-color: #ffc107;
+            border-radius: 50%;
+            padding: 0.25rem 0.5rem;
+            color: #000;
+        }
+
+        /* Estilo para os produtos */
+        .container {
+            margin-top: 2rem;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-around;
+        }
+
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #dee2e6;
+            padding: 1rem;
+            width: 200px;
+        }
+
+        .product-card img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .product-card button {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Farmácia</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/index">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/index">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="header-buttons">
+                <a href="/verCarrinho" class="btn btn-secondary">
+                    <i class="fas fa-shopping-cart"></i>- Ver Carrinho
+                    <span class="cart-count" th:text="${quantidadeItensCarrinho}">0</span>
+                </a>
+                <a href="/finalizarCompra" class="btn btn-danger">Finalizar Compra</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-4">
+        <h1 class="mt-4">Produtos</h1>
+        <div class="products">
+            <div class="product-card" th:each="produto : ${produtos}">
+                <img th:src="@{${produto.imageUri}}" alt="Imagem do produto">
+                <h5 th:text="${produto.nome}"></h5>
+                <p th:text="${produto.descricao}"></p>
+                <p>Estoque: <span th:text="${produto.estoque}"></span></p>
+                <p>Preço: <span th:text="${produto.preco}"></span></p>
+                <form th:action="@{/adicionarCarrinho}" method="get">
+                    <input type="hidden" name="id" th:value="${produto.id}" />
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-muted mb-0">© 2024 Farmácia. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-muted me-3">Política de Privacidade</a>
+                    <a href="#" class="text-muted">Termos de Serviço</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

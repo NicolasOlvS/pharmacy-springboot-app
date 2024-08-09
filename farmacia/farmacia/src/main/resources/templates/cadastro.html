@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastro de Produto</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Cadastrar Novo Produto</h1>
+        <form th:action="@{/salvar}" th:object="${produto}" method="post">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" th:field="*{nome}" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <input type="text" id="descricao" th:field="*{descricao}" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="preco">Preço</label>
+                <input type="number" id="preco" th:field="*{preco}" class="form-control" step="0.01" />
+            </div>
+            <div class="form-group">
+                <label for="codigoProduto">Código do Produto</label>
+                <input type="text" id="codigoProduto" th:field="*{codigoProduto}" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="estoque">Estoque</label>
+                <input type="number" id="estoque" th:field="*{estoque}" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="imageUri">URL da Imagem</label>
+                <input type="text" id="imageUri" th:field="*{imageUri}" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+</body>
+</html>

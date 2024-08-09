@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Carrinho</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container">
+        <h1 class="mt-4">Carrinho</h1>
+
+        <!-- Exibir itens do carrinho -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Imagem</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="produto : ${carrinho}">
+                    <td><img th:src="@{${produto.imageUri}}" alt="Imagem do produto" style="width: 100px;"></td>
+                    <td th:text="${produto.nome}"></td>
+                    <td th:text="${produto.descricao}"></td>
+                    <td th:text="${produto.preco}"></td>
+                    <td>1</td> <!-- Quantidade fixa para simplificação -->
+                    <td th:text="${produto.preco}"></td> <!-- Total = Preço * Quantidade -->
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Exibir quantidade total de itens no carrinho -->
+        <p>Total de itens no carrinho: <span th:text="${quantidadeItensCarrinho}">0</span></p>
+        <!-- Exibir o valor total -->
+        <h3>Total: <span th:text="${valorTotal}">0.00</span></h3>
+        <a href="/index" class="btn btn-secondary">Voltar</a>
+
+        <!-- Incluir o Footer -->
+    <div th:replace="fragments/footer :: footer"></div>
+    </div>
+</body>
+</html>

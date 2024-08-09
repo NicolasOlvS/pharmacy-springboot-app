@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Administração</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container mt-4">
+        <h1>Lista de Produtos</h1>
+        
+        <!-- Exibe a mensagem de sucesso -->
+        <div th:if="${mensagem}" class="alert alert-success" role="alert">
+            <p th:text="${mensagem}"></p>
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="produto : ${produtos}">
+                    <td th:text="${produto.id}">ID</td>
+                    <td th:text="${produto.nome}">Nome</td>
+                    <td th:text="${produto.descricao}">Descrição</td>
+                    <td th:text="${produto.preco}">Preço</td>
+                    <td th:text="${produto.estoque}">Estoque</td>
+                    <td>
+                        <a th:href="@{/editar(id=${produto.id})}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/deletar(id=${produto.id})}" class="btn btn-danger btn-sm">Deletar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/cadastro" class="btn btn-primary">Cadastrar Novo Produto</a>
+        <div th:replace="fragments/footer :: footer"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Produto</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Editar Produto</h1>
+        <form th:action="@{/atualizarProduto}" th:object="${produto}" method="post">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" th:field="*{nome}" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" th:field="*{descricao}" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="preco">Preço</label>
+                <input type="number" step="0.01" id="preco" th:field="*{preco}" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="codigoProduto">Código do Produto</label>
+                <input type="text" id="codigoProduto" th:field="*{codigoProduto}" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="estoque">Estoque</label>
+                <input type="number" id="estoque" th:field="*{estoque}" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="imageUri">URL da Imagem</label>
+                <input type="text" id="imageUri" th:field="*{imageUri}" class="form-control" />
+            </div>
+            <input type="hidden" th:field="*{id}" />
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+        <a href="/admin" class="btn btn-secondary mt-2">Cancelar</a>
+    </div>
+</body>
+</html>
